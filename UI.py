@@ -2,7 +2,7 @@ import pandas as pd
 from pyexpat import features
 
 from numpy.ma.core import choose
-
+from check import Check
 from model_coach import Train
 from classification import Classify
 
@@ -79,5 +79,30 @@ class Menu:
             if item[1] > result[final_answer]:
                 final_answer = item[0]
         print(f'The answer is {final_answer}!')
-o1 = Menu(pd.read_csv('PlayTennis.csv'))
-o1.menu()
+
+    def choice_check_data(self):
+        check = Check(self.df)
+        cond = True
+        from_data = ''
+        target = ''
+        while cond:
+            print(f"What is your target line:")
+            for i,col in enumerate(self.df.columns):
+                print(f'{i+1}. {col}')
+            target = input()
+            from_data = input(f"How many from {len(self.df)} do you want to check:\n")
+            if target in self.df.columns and from_data.isdigit():
+                from_data = int(from_data)
+                if from_data < len(self.df):
+                    cond = False
+                else:
+                    print('Invalid value\n'
+                          'Please try again!')
+            else:
+                print('Invalid value\n'
+                      'Please try again!')
+        check.check_data(from_data,target)
+o1 = Menu(pd.read_csv('phishing.csv'))
+o1.choice_check_data()
+# o1 = Check(pd.read_csv('phishing.csv'))
+# o1.check_data(3300,'class')
