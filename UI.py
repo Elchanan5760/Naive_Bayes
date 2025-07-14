@@ -19,7 +19,7 @@ class Menu:
             if navigation == '1':
                 self.choose_values()
             elif navigation == '2':
-                pass
+                self.choice_check_data()
             elif navigation == '0':
                 cond = False
             else:
@@ -61,11 +61,9 @@ class Menu:
             else:
                 print('Invalid value\n'
                       'Please try again!')
-        print(values)
         couch = Train(self.df)
         calc = Classify(self.df)
-        print(couch.create_counter(columns[int(target)-1]))
-        result = calc.calculate(couch.create_counter(columns[int(target)-1]), columns[int(target)-1], values)
+        result = calc.calculate(couch.create_counter(columns[int(target) - 1]), columns[int(target) - 1], values)
         sumi = 0
         for val in result.values():
             sumi += val
@@ -91,9 +89,10 @@ class Menu:
                 print(f'{i+1}. {col}')
             target = input()
             from_data = input(f"How many from {len(self.df)} do you want to check:\n")
-            if target in self.df.columns and from_data.isdigit():
+            if target.isdigit() and from_data.isdigit():
                 from_data = int(from_data)
-                if from_data < len(self.df):
+                target = int(target)
+                if from_data < len(self.df) and target <= len(self.df.columns):
                     cond = False
                 else:
                     print('Invalid value\n'
@@ -101,8 +100,8 @@ class Menu:
             else:
                 print('Invalid value\n'
                       'Please try again!')
-        check.check_data(from_data,target)
+        check.check_data(from_data,self.df.columns.tolist()[target-1])
 o1 = Menu(pd.read_csv('phishing.csv'))
-o1.choice_check_data()
+o1.menu()
 # o1 = Check(pd.read_csv('phishing.csv'))
 # o1.check_data(3300,'class')

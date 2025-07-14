@@ -3,12 +3,12 @@
 class Train:
     def __init__(self,df):
         self.df = df
-    def create_counter(self,instance):
-        values = self.df[instance].unique()
+    def create_counter(self,target):
+        values = self.df[target].unique()
         # print(values)
         list_instance = []
         for option in values:
-            list_instance.append(self.df[(self.df[instance] == option)])
+            list_instance.append(self.df[(self.df[target] == option)])
         data = {}
         for variable in list_instance:
             dict_col = {}
@@ -17,5 +17,5 @@ class Train:
                 for val in variable[col]:
                     dict_val[val] += 1
                 dict_col[col] = dict_val
-            data[variable.head(1)[instance].iloc[0]] = dict_col
+            data[variable.head(1)[target].iloc[0]] = dict_col
         return data
