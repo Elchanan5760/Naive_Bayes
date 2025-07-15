@@ -1,9 +1,11 @@
 import pandas as pd
-import numpy as np
-from UI import Menu
+from menu.UI import Menu
+from utils import load_df
+from utils.load_df import MyUtils
 
 if __name__ == "__main__":
-    o1 = Menu(pd.read_csv('phishing.csv'))
+    util = MyUtils()
+    o1 = Menu(util.load_data())
     o1.menu()
 
 
