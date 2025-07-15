@@ -101,7 +101,6 @@ class Menu:
                 print('Invalid value\n'
                       'Please try again!')
         check.check_data(from_data,self.df.columns.tolist()[target-1])
-o1 = Menu(pd.read_csv('phishing.csv'))
-o1.menu()
+
 # o1 = Check(pd.read_csv('phishing.csv'))
 # o1.check_data(3300,'class')
