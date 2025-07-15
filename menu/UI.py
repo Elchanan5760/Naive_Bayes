@@ -1,10 +1,6 @@
-import pandas as pd
-from pyexpat import features
-
-from numpy.ma.core import choose
-from check import Check
-from model_coach import Train
-from classification import Classify
+from calc_naive_bayes.check import Check
+from calc_naive_bayes.model_coach import Train
+from calc_naive_bayes.classification import Classify
 
 class Menu:
     def __init__(self,df):
